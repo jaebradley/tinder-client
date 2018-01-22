@@ -19,7 +19,7 @@ const GENDER_SEARCH_OPTIONS = Object.freeze({
 class TinderClient {
   constructor(client) {
     if (!client) {
-      throw new Error('Call authorize method');
+      throw new Error('Call create method');
     }
 
     this.client = client;
@@ -121,7 +121,7 @@ class TinderClient {
     }).then(response => response.data);
   }
 
-  async sendMatchMessage({ matchId, message }) {
+  async messageMatch({ matchId, message }) {
     return this.client({
       method: 'post',
       url: `/user/matches/${matchId}`,

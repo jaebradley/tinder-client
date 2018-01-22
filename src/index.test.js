@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import TinderClient from './index';
+import { TinderClient } from './index';
 
 dotenv.config();
 

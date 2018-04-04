@@ -9,11 +9,11 @@
   },
   "plugins": [
     "@babel/transform-runtime",
-    "@babel/transform-async-to-generator",
+    "@babel/transform-async-to-generator"
   ],
   "ignore": [
     "node_modules",
-    "**/*.test.js",
-    "setupTest.js"
+    "setupTest.js",
+    "src/coverage"
   ]
 }

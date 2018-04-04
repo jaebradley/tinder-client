@@ -13,7 +13,8 @@
     "test": "jest --coverage --no-cache",
     "prepublishOnly": "npm run compile:prod",
     "semantic-commit": "commit",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
@@ -58,7 +59,8 @@
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
-    "semantic-release": "^12.2.2"
+    "semantic-release": "^12.2.2",
+    "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
     "axios": "^0.17.1"

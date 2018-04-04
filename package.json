@@ -1,24 +1,31 @@
 {
   "name": "tinder-client",
   "version": "0.0.0-development",
-  "description": "Client to connect to the Tinder API",
+  "description": "NodeJS client to access the Tinder API",
   "main": "build/index.js",
   "scripts": {
     "codecov": "codecov",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "compile": "babel -d build/ src/ --copy-files --ignore node_modules,*.test.js,setupTest.js",
+    "compile": "babel -d build/ src/ --delete-dir-on-start",
+    "compile:prod": "BABEL_ENV=production npm run compile",
+    "is-es5": "es-check es5 build/*.js",
     "lint": "eslint --ext .js .",
-    "test": "jest --coverage",
-    "prepublishOnly": "npm run compile",
+    "test": "jest --coverage --no-cache",
+    "prepublishOnly": "npm run compile:prod",
     "semantic-commit": "commit",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jaebradley/tinder-client.git"
   },
   "keywords": [
-    "tinder"
+    "tinder",
+    "client",
+    "tinder client",
+    "tinder api",
+    "tinder nodejs"
   ],
   "author": "jae.b.bradley@gmail.com",
   "license": "MIT",
@@ -30,27 +37,33 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-transform-async-to-generator": "^7.0.0-beta.44",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/runtime": "^7.0.0-beta.44",
     "@commitlint/cli": "^6.0.2",
     "@commitlint/config-angular": "^6.0.2",
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "axios-debug": "0.0.4",
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2016": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^22.4.3",
+    "babel-preset-minify": "^0.3.0",
     "codecov": "^3.0.0",
     "dotenv": "^4.0.0",
+    "es-check": "^2.0.3",
     "eslint": "^4.12.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
-    "jest": "^22.0.3",
-    "semantic-release": "^12.2.2"
+    "jest": "^22.4.3",
+    "semantic-release": "^15.1.5",
+    "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
+    "ajv": "^5.5.2",
     "axios": "^0.17.1"
   }
 }

@@ -59,10 +59,11 @@
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
-    "semantic-release": "^12.2.2",
+    "semantic-release": "^15.1.5",
     "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
+    "ajv": "^5.5.2",
     "axios": "^0.17.1"
   }
 }

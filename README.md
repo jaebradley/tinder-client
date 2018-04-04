@@ -1,5 +1,23 @@
 # Tinder Client
 
+* [Introduction](#introduction)
+* [API](#api)
+  * [Create a client](#create-a-client)
+  * [`getProfile`](#getprofile)
+  * [`updateProfile`](#updateprofile)
+  * [`getRecommendations`](#getrecommendations)
+  * [`getUser`](#getuser)
+  * [`getMetadata`](#getmetadata)
+  * [`changeLocation`](#changelocation)
+  * [`like`](#like)
+  * [`pass`](#pass)
+  * [`superLike`](#superlike)
+  * [`messageMatch`](#messagematch)
+  * [`getMatch`](#getmatch)
+  * [`getMessage`](#getmessage)
+  * [`resetTemporaryLocation`](#resettemporarylocation)
+  * [`temporarilyChangeLocation`](#temporarilychangelocation)
+
 ## Introduction
 
 Tinder has an unofficial API that has been documented by [this gist](https://gist.github.com/rtt/10403467) and [`fbessez/Tinder`](https://github.com/fbessez/Tinder).
@@ -16,5 +34,101 @@ import { TinderClient } from 'tinder-client';
 const facebookUserId = 'someFacebookUserId';
 const facebookToken = 'someFacebookToken';
 const client = await TinderClient.create({ facebookUserId, facebookToken });
+```
+
+### `getProfile`
+
+```javascript
 const profile = await client.getProfile();
+```
+
+### `updateProfile`
+
+```javascript
+import { GENDERS, GENDER_SEARCH_OPTIONS, TinderClient } from 'tinder-client';
+
+// create client
+
+const userGender = GENDERS.female;
+const searchPreferences = {
+  maximumAge: 100,
+  minimumAge: 99,
+  genderPreference: GENDER_SEARCH_OPTIONS.both,
+  maximumRangeInKilometers: 100,
+};
+const profile = await client.updateProfile({ userGender, searchPreferences })
+```
+
+### `getRecommendations`
+
+```javascript
+const recommendations = await client.getRecommendations();
+```
+
+### `getUser`
+
+```javascript
+const user = await client.getUser('someUserId');
+```
+
+### `getMetadata`
+
+Get metadata for authenticated user
+
+```javascript
+const myMetadata = await client.getMetadata();
+```
+
+### `changeLocation`
+
+```javascript
+await client.changeLocation({ latitude: 'someLatitude', longitude: 'someLongitude' });
+```
+
+### `like`
+
+```javascript
+await client.like('someUserId');
+```
+
+### `pass`
+
+```javascript
+await client.pass('someUserId');
+```
+
+### `superLike`
+
+```javascript
+await client.superLike('someUserId');
+```
+
+### `messageMatch`
+
+```javascript
+await client.messageMatch({ matchId: 'someMatch', message: 'someMessage' });
+```
+
+### `getMatch`
+
+```javascript
+await client.getMatch('someMatchId');
+```
+
+### `getMessage`
+
+```javascript
+await client.getMessage('someMessageId');
+```
+
+### `resetTemporaryLocation`
+
+```javascript
+await client.resetTemporaryLocation();
+```
+
+### `temporarilyChangeLocation`
+
+```javascript
+await client.temporarilyChangeLocation({ latitude: 'someLatitude', longitude: 'someLongitude' });
 ```

@@ -10,5 +10,10 @@
   "plugins": [
     "@babel/transform-runtime",
     "@babel/transform-async-to-generator",
+  ],
+  "ignore": [
+    "node_modules",
+    "**/*.test.js",
+    "setupTest.js"
   ]
 }

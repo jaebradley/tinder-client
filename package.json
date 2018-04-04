@@ -6,10 +6,12 @@
   "scripts": {
     "codecov": "codecov",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "compile": "babel -d build/ src/ --copy-files --ignore node_modules,*.test.js,setupTest.js",
+    "compile": "babel -d build/ src/ --delete-dir-on-start",
+    "compile:prod": "BABEL_ENV=production npm run compile",
+    "is-es5": "es-check es5 build/*.js",
     "lint": "eslint --ext .js .",
     "test": "jest --coverage",
-    "prepublishOnly": "npm run compile",
+    "prepublishOnly": "npm run compile:prod",
     "semantic-commit": "commit",
     "semantic-release": "semantic-release"
   },
@@ -49,6 +51,7 @@
     "babel-preset-minify": "^0.3.0",
     "codecov": "^3.0.0",
     "dotenv": "^4.0.0",
+    "es-check": "^2.0.3",
     "eslint": "^4.12.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",

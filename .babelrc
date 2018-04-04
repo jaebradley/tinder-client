@@ -1,4 +1,14 @@
-
 {
-  "presets": ["es2015", "es2016", "es2017", "stage-0"]
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "env": {
+    "production": {
+      "presets": ["minify"]
+    }
+  },
+  "plugins": [
+    "@babel/transform-runtime",
+    "@babel/transform-async-to-generator",
+  ]
 }

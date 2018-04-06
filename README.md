@@ -1,5 +1,7 @@
 # Tinder Client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/tinder-client.svg)](https://greenkeeper.io/)
+
 * [Introduction](#introduction)
 * [API](#api)
   * [Create a client](#create-a-client)

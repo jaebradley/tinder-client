@@ -52,7 +52,7 @@
     "babel-jest": "^22.4.3",
     "babel-preset-minify": "^0.3.0",
     "codecov": "^3.0.0",
-    "dotenv": "^4.0.0",
+    "dotenv": "^5.0.1",
     "es-check": "^2.0.3",
     "eslint": "^4.12.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -63,7 +63,7 @@
     "travis-deploy-once": "^4.4.1"
   },
   "dependencies": {
-    "ajv": "^5.5.2",
-    "axios": "^0.17.1"
+    "ajv": "^6.4.0",
+    "axios": "^0.18.0"
   }
 }

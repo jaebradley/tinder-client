@@ -1,6 +1,9 @@
 # Tinder Client
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/tinder-client.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/jaebradley/tinder-client.svg?branch=master)](https://travis-ci.org/jaebradley/tinder-client)
+[![npm](https://img.shields.io/npm/dt/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
+[![npm](https://img.shields.io/npm/v/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 
 * [Introduction](#introduction)
 * [API](#api)

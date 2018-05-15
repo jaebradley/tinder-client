@@ -15,7 +15,7 @@
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "deploy": "npm run travis-deploy-once 'npm run semantic-release'",
     "gc": "commit",
-    "is-es5": "es-check es5 build/*.js",
+    "is-es5": "es-check es5 build/index.js",
     "lint": "eslint --ext .js .",
     "prepare": "npm run build",
     "semantic-release": "semantic-release",

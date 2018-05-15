@@ -25,22 +25,19 @@ class TinderClient {
     this.client = client;
   }
 
-  static async create({ facebookUserId, facebookToken }) {
-    const tinderAuthResponse = await axios.post('https://api.gotinder.com/auth', {
+  static create({ facebookUserId, facebookToken }) {
+    return axios.post('https://api.gotinder.com/auth', {
       facebook_id: facebookUserId,
       facebook_token: facebookToken,
-    });
-    const tinderAuthToken = tinderAuthResponse.data.token;
-    const client = await axios.create({
+    }).then(response => axios.create({
       baseURL: 'https://api.gotinder.com',
       headers: {
-        'X-Auth-Token': tinderAuthToken,
+        'X-Auth-Token': response.data.token,
         'Content-Type': 'application/json',
         'User-Agent': 'Tinder Android Version 2.2.3',
         os_version: '16',
       },
-    });
-    return new TinderClient(client);
+    })).then(client => new TinderClient(client));
   }
 
   getProfile() {

@@ -1,19 +1,28 @@
 {
-  "presets": [
-    "@babel/preset-env"
-  ],
   "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          { "modules": "umd" }
+        ]
+      ],
+      "plugins": [
+        "@babel/transform-runtime",
+        "@babel/transform-async-to-generator"
+      ]
+    },
     "production": {
-      "presets": ["minify"]
+      "presets": [
+        [
+          "@babel/preset-env",
+          { "modules": false }
+        ]
+      ]
     }
   },
-  "plugins": [
-    "@babel/transform-runtime",
-    "@babel/transform-async-to-generator"
-  ],
   "ignore": [
-    "node_modules",
-    "setupTest.js",
-    "src/coverage"
+    "node_modules/**",
+    "*.test.js"
   ]
 }

@@ -2,18 +2,24 @@
   "name": "tinder-client",
   "version": "0.0.0-development",
   "description": "NodeJS client to access the Tinder API",
-  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "browser": "build/index.js",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "global": false,
   "scripts": {
+    "build": "BABEL_ENV=production rollup -c",
     "codecov": "codecov",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "compile": "babel -d build/ src/ --delete-dir-on-start",
-    "compile:prod": "BABEL_ENV=production npm run compile",
+    "deploy": "npm run travis-deploy-once 'npm run semantic-release'",
+    "gc": "commit",
     "is-es5": "es-check es5 build/*.js",
     "lint": "eslint --ext .js .",
-    "test": "jest --coverage --no-cache",
-    "prepublishOnly": "npm run compile:prod",
-    "semantic-commit": "commit",
+    "prepare": "npm run build",
     "semantic-release": "semantic-release",
+    "test": "BABEL_ENV=test jest src/ --coverage --no-cache",
     "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
@@ -34,8 +40,13 @@
   },
   "homepage": "https://github.com/jaebradley/tinder-client#readme",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/"
+    ]
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
@@ -47,11 +58,13 @@
     "@commitlint/config-angular": "^6.0.2",
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
+    "ajv": "^5.5.2",
+    "axios": "^0.18.0",
     "axios-debug": "0.0.4",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.4.3",
     "babel-preset-minify": "^0.4.0",
-    "codecov": "^3.0.0",
+    "codecov": "^3.0.2",
     "dotenv": "^5.0.1",
     "es-check": "^2.0.3",
     "eslint": "^4.12.0",
@@ -59,11 +72,18 @@
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "rollup-plugin-babel-minify": "^4.0.0",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
     "semantic-release": "^15.1.5",
     "travis-deploy-once": "^5.0.0"
   },
-  "dependencies": {
-    "ajv": "^6.4.0",
+  "peerDependencies": {
     "axios": "^0.18.0"
   }
 }

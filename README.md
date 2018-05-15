@@ -6,6 +6,7 @@
 [![npm](https://img.shields.io/npm/v/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 
 * [Introduction](#introduction)
+* [Dependencies](#dependencies)
 * [API](#api)
   * [Create a client](#create-a-client)
   * [`getProfile`](#getprofile)
@@ -29,6 +30,10 @@ Tinder has an unofficial API that has been documented by [this gist](https://gis
 
 There is also an existing Node Client, [`tinderjs`](https://www.npmjs.com/package/tinderjs). This is a `Promise`-based equivalent.
 
+## Dependencies
+
+`tinder-client` has one dependency: [`axios`](https://github.com/axios/axios) (`^0.18.0`). It **does not** come bundled with this package - it is defined as a `peerDependency` and you **will** need to install it separately.
+
 ## API
 
 ### Create a client
@@ -51,8 +56,6 @@ const profile = await client.getProfile();
 
 ```javascript
 import { GENDERS, GENDER_SEARCH_OPTIONS, TinderClient } from 'tinder-client';
-
-// create client
 
 const userGender = GENDERS.female;
 const searchPreferences = {

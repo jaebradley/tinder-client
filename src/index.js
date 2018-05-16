@@ -74,7 +74,7 @@ class TinderClient {
       url: '/user/recs',
     }).then(response => response.data);
   }
-  
+
   getUpdates(timestamp) {
     return this.client({
       method: 'post',

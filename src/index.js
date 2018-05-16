@@ -79,8 +79,8 @@ class TinderClient {
     return this.client({
       method: 'post',
       url: '/updates',
-      data: {last_activity_date: timestamp},
-      headers: {platform: 'web'}
+      data: { last_activity_date: timestamp },
+      headers: { platform: 'web' },
     }).then(response => response.data);
   }
 

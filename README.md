@@ -12,6 +12,7 @@
   * [`getProfile`](#getprofile)
   * [`updateProfile`](#updateprofile)
   * [`getRecommendations`](#getrecommendations)
+  * [`getUpdates`](#getupdates)
   * [`getUser`](#getuser)
   * [`getMetadata`](#getmetadata)
   * [`changeLocation`](#changelocation)
@@ -71,6 +72,12 @@ const profile = await client.updateProfile({ userGender, searchPreferences })
 
 ```javascript
 const recommendations = await client.getRecommendations();
+```
+
+### `getUpdates`
+
+```javascript
+const updates = await client.getUpdates('someISODateString');
 ```
 
 ### `getUser`

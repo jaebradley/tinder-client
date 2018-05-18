@@ -12,19 +12,19 @@ const config = {
   input: 'src/index.js',
   output: [
     {
-      file: pkg.main,
+      file: pkg.browser,
       format: 'umd',
       name: pkg.name,
       globals: ['axios'],
     },
     {
-      file: 'build/index.cjs.js',
+      file: pkg.main,
       format: 'cjs',
       name: pkg.name,
       globals: ['axios'],
     },
     {
-      file: 'build/index.esm.js',
+      file: pkg.module,
       format: 'es',
       name: pkg.name,
       globals: ['axios'],

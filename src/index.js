@@ -129,7 +129,7 @@ class TinderClient {
   getMatch(matchId) {
     return this.client({
       method: 'get',
-      url: `matches/${matchId}`,
+      url: `/matches/${matchId}`,
     }).then(response => response.data);
   }
 

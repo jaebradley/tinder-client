@@ -4,7 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import localResolve from 'rollup-plugin-local-resolve';
 import filesize from 'rollup-plugin-filesize';
 import minify from 'rollup-plugin-babel-minify';
-import uglify from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
@@ -43,7 +43,7 @@ const config = {
       modulesOnly: true,
     }),
     minify(),
-    uglify(),
+    terser(),
     commonjs(),
     filesize(),
   ],

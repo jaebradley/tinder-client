@@ -55,7 +55,7 @@
     "@babel/preset-env": "^7.0.0-beta.47",
     "@babel/runtime": "^7.0.0-beta.47",
     "@commitlint/cli": "^6.0.2",
-    "@commitlint/config-angular": "^6.0.2",
+    "@commitlint/config-angular": "^7.0.0",
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "ajv": "^5.5.2",

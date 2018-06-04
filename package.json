@@ -46,7 +46,9 @@
       "<rootDir>/node_modules/"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.47",
     "@babel/core": "^7.0.0-beta.47",
@@ -59,7 +61,6 @@
     "@commitlint/prompt": "^6.0.2",
     "@commitlint/prompt-cli": "^6.0.2",
     "ajv": "^5.5.2",
-    "axios": "^0.18.0",
     "axios-debug": "0.0.4",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.4.3",
@@ -82,8 +83,5 @@
     "rollup-plugin-terser": "^1.0.1",
     "semantic-release": "^15.1.5",
     "travis-deploy-once": "^5.0.0"
-  },
-  "peerDependencies": {
-    "axios": "^0.18.0"
   }
 }

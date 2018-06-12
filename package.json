@@ -59,7 +59,7 @@
     "@commitlint/cli": "^6.0.2",
     "@commitlint/config-angular": "^7.0.1",
     "@commitlint/prompt": "^6.0.2",
-    "@commitlint/prompt-cli": "^6.0.2",
+    "@commitlint/prompt-cli": "^7.0.0",
     "ajv": "^5.5.2",
     "axios-debug": "0.0.4",
     "babel-core": "^7.0.0-0",

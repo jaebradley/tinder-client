@@ -20,6 +20,7 @@ jobs:
         - npm run is-es5
       before_script: greenkeeper-lockfile-update
       after_script: greenkeeper-lockfile-upload
+      after_success: npm run codecov
     - stage: deploy
       if: branch = master
       script: npm run travis-deploy-once "npm run semantic-release"

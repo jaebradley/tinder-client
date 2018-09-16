@@ -80,7 +80,7 @@
     "rollup-plugin-filesize": "^4.0.0",
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-terser": "^2.0.0",
+    "rollup-plugin-terser": "^3.0.0",
     "semantic-release": "^15.1.5",
     "travis-deploy-once": "^5.0.0"
   }

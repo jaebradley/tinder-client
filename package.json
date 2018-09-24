@@ -64,7 +64,7 @@
     "axios-debug": "0.0.4",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
-    "babel-preset-minify": "^0.4.0",
+    "babel-preset-minify": "^0.5.0",
     "codecov": "^3.0.2",
     "dotenv": "^6.0.0",
     "es-check": "^2.0.3",

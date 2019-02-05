@@ -6,8 +6,7 @@
     "build"
   ],
   "engines": {
-    "node": "^10.15.1",
-    "npm": "^6.4.1"
+    "node": "^8 || ^10 || ^11"
   },
   "browser": "build/index.js",
   "main": "build/index.cjs.js",

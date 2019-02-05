@@ -9,28 +9,34 @@ import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 const config = {
+  external: ['axios'],
   input: 'src/index.js',
   output: [
     {
       file: pkg.browser,
       format: 'umd',
       name: pkg.name,
-      globals: ['axios'],
+      globals: {
+        axios: 'axios',
+      },
     },
     {
       file: pkg.main,
       format: 'cjs',
       name: pkg.name,
-      globals: ['axios'],
+      globals: {
+        axios: 'axios',
+      },
     },
     {
       file: pkg.module,
       format: 'es',
       name: pkg.name,
-      globals: ['axios'],
+      globals: {
+        axios: 'axios',
+      },
     },
   ],
-  external: ['axios'],
   plugins: [
     babel({ exclude: 'node_modules/**' }),
     localResolve(),

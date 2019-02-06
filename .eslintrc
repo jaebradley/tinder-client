@@ -1,5 +1,10 @@
 
 {
+  "settings": {
+    "rules": {
+      "quotes": "simple"
+    }
+  },
   "extends": "airbnb-base",
   "env": {
     "jest": true

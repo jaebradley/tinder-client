@@ -229,6 +229,20 @@ describe('Unit tests', () => {
       });
     });
 
+    describe('getUpdates', () => {
+      it('get all updates since the given date', async () => {
+        const timestamp = '2017-03-25T20:58:00.404Z';
+        const response = await client.getUpdates(timestamp);
+        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
+        expect(mockInstanceMethod).toHaveBeenCalledWith({
+          method: 'post',
+          url: '/updates',
+          data: { last_activity_date: timestamp },
+        });
+        expect(response).toBe(clientResponseData);
+      });
+    });
+
     describe('resetTemporaryLocation', () => {
       it('resets temporary location', async () => {
         const response = await client.resetTemporaryLocation();

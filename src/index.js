@@ -140,6 +140,14 @@ class TinderClient {
     }).then(response => response.data);
   }
 
+  getUpdates(fromTimestamp = '') {
+    return this.client({
+      method: 'post',
+      url: '/updates',
+      data: { last_activity_date: fromTimestamp },
+    }).then(response => response.data);
+  }
+
   resetTemporaryLocation() {
     return this.client({
       method: 'post',

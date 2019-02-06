@@ -108,6 +108,14 @@ class TinderClient {
     return this.client.get(`/message/${messageId}`).then(response => response.data);
   }
 
+  getUpdates(fromTimestamp = '') {
+    return this.client({
+      method: 'post',
+      url: '/updates',
+      data: { last_activity_date: fromTimestamp },
+    }).then(response => response.data);
+  }
+
   resetTemporaryLocation() {
     return this.client.post('/passport/user/reset').then(response => response.data);
   }

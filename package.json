@@ -22,7 +22,9 @@
     "lint-commit-msg": "commitlint -e $GIT_PARAMS",
     "prepare": "npm run build",
     "semantic-release": "semantic-release",
-    "test": "BABEL_ENV=test jest src/ --coverage --no-cache",
+    "test": "BABEL_ENV=test jest src/ -c jest.config.shared.js",
+    "unit-test": "BABEL_ENV=test jest src/ -c jest.config.unit.js",
+    "integration-test": "BABEL_ENV=test jest src/ -c jest.config.integration.js",
     "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
@@ -42,13 +44,6 @@
     "url": "https://github.com/jaebradley/tinder-client/issues"
   },
   "homepage": "https://github.com/jaebradley/tinder-client#readme",
-  "jest": {
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/",
-      "<rootDir>/node_modules/"
-    ]
-  },
   "dependencies": {
     "axios": "^0.18.0"
   },

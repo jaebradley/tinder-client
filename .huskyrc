@@ -2,5 +2,6 @@
   "hooks": {
     "pre-commit": "npm run lint",
     "commit-msg": "npm run lint-commit-msg",
+    "pre-push": "npm run unit-test"
   }
 }

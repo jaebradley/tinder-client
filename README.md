@@ -25,6 +25,7 @@
     - [`resetTemporaryLocation`](#resettemporarylocation)
     - [`temporarilyChangeLocation`](#temporarilychangelocation)
   - [Local Development](#local-development)
+    - [Git Hooks](#git-hooks)
     - [Commit Linting](#commit-linting)
     - [Retrieving Facebook User ID and Facebook Access Token](#retrieving-facebook-user-id-and-facebook-access-token)
 
@@ -149,9 +150,23 @@ await client.temporarilyChangeLocation({ latitude: 'someLatitude', longitude: 's
 
 After cloning the repository, use `nvm` / `npm` to install dependencies.
 
-To run tests, execute `npm run test`. In order to execute local integration tests successfully, you'll need to specify `FACEBOOK_TOKEN` and `FACEBOOK_USER_ID` environment variables in a `.env` file
+To run both all tests, execute `npm run test`.
+
+To only run unit tests, execute `npm run unit-test`.
+
+To only run integration tests, execute `npm run integration-test`.
+
+In order to execute local integration tests successfully, you'll need to specify `FACEBOOK_TOKEN` and `FACEBOOK_USER_ID` environment variables in a `.env` file
 
 To build the production bundle, execute `npm run build`.
+
+### Git Hooks
+
+This project uses [`husky`](https://github.com/typicode/husky) to maintain git hooks.
+
+- `pre-commit` - run `eslint`
+- `commit-msg` - run commit message linting
+- `pre-push` - run unit tests
 
 ### Commit Linting
 

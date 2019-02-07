@@ -149,7 +149,7 @@ await client.temporarilyChangeLocation({ latitude: 'someLatitude', longitude: 's
 
 After cloning the repository, use `nvm` / `npm` to install dependencies.
 
-To run tests, execute `npm run test`.
+To run tests, execute `npm run test`. In order to execute local integration tests successfully, you'll need to specify `FACEBOOK_TOKEN` and `FACEBOOK_USER_ID` environment variables in a `.env` file
 
 To build the production bundle, execute `npm run build`.
 

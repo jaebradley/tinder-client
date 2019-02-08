@@ -29,9 +29,10 @@ describe('Unit tests', () => {
         baseURL: 'https://api.gotinder.com',
         headers: {
           'X-Auth-Token': 'token',
-          'Content-Type': 'application/json',
-          'User-Agent': 'Tinder Android Version 2.2.3',
-          os_version: '16',
+          app_version: '6.9.4',
+          platform: 'ios',
+          'User-Agent': 'Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)',
+          Accept: 'application/json',
         },
       });
       expect(client).toBeInstanceOf(TinderClient);

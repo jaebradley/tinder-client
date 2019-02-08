@@ -54,5 +54,29 @@ describe('TinderClient', () => {
         await client.getMetadata();
       });
     });
+
+    xdescribe('#like', () => {
+      it('likes recommendation', async () => {
+        const client = await TinderClient.create({
+          facebookUserId: process.env.FACEBOOK_USER_ID,
+          facebookToken: process.env.FACEBOOK_TOKEN,
+        });
+        const recommendations = await client.getRecommendations();
+        const firstRecommendationUserId = recommendations[0].env_id;
+        await client.like(firstRecommendationUserId);
+      });
+    });
+
+    xdescribe('#pass', () => {
+      it('passes on recommendation', async () => {
+        const client = await TinderClient.create({
+          facebookUserId: process.env.FACEBOOK_USER_ID,
+          facebookToken: process.env.FACEBOOK_TOKEN,
+        });
+        const recommendations = await client.getRecommendations();
+        const firstRecommendationUserId = recommendations[0].env_id;
+        await client.pass(firstRecommendationUserId);
+      });
+    });
   });
 });

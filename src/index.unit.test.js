@@ -1,37 +1,46 @@
-import {
-  mockPost,
-  mockCreate,
-  mockInstanceMethod,
-  clientResponseData,
-} from 'axios';
+import axios from 'jest-mock-axios';
 import { TinderClient } from './index';
-
-jest.mock('axios');
 
 describe('Unit tests', () => {
   const facebookUserId = 'facebookUserId';
   const facebookToken = 'facebookToken';
 
+  beforeEach(() => {
+    axios.post.mockImplementation(async (url) => {
+      if (url === 'https://api.gotinder.com/auth') {
+        return { data: { token: 'token' } };
+      }
+      return { data: 'default response' };
+    });
+  });
+  axios.create.mockResolvedValue(axios);
+  axios.get.mockResolvedValue({ data: 'default response' });
+
+  afterEach(() => {
+    axios.reset();
+  });
+
   describe('static constructor', () => {
     it('generates client from static constructor', async () => {
       const client = await TinderClient.create({ facebookUserId, facebookToken });
       expect(client).toBeDefined();
-      expect(mockPost).toHaveBeenCalledTimes(1);
-      expect(mockPost).toHaveBeenCalledWith(
+      expect(axios.post).toHaveBeenCalledTimes(1);
+      expect(axios.post).toHaveBeenCalledWith(
         'https://api.gotinder.com/auth',
         {
           facebook_id: facebookUserId,
           facebook_token: facebookToken,
         },
       );
-      expect(mockCreate).toHaveBeenCalledTimes(1);
-      expect(mockCreate).toHaveBeenCalledWith({
+      expect(axios.create).toHaveBeenCalledTimes(1);
+      expect(axios.create).toHaveBeenCalledWith({
         baseURL: 'https://api.gotinder.com',
         headers: {
           'X-Auth-Token': 'token',
-          'Content-Type': 'application/json',
-          'User-Agent': 'Tinder Android Version 2.2.3',
-          os_version: '16',
+          app_version: '6.9.4',
+          platform: 'ios',
+          'User-Agent': 'Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)',
+          Accept: 'application/json',
         },
       });
       expect(client).toBeInstanceOf(TinderClient);
@@ -42,25 +51,17 @@ describe('Unit tests', () => {
     let client;
 
     beforeEach(async () => {
-      client = await TinderClient.create({ facebookUserId, facebookToken });
-    });
 
-    afterEach(() => {
-      mockPost.mockClear();
-      mockCreate.mockClear();
-      mockInstanceMethod.mockClear();
     });
 
     describe('getProfile', () => {
       it('gets profile', async () => {
+        client = await TinderClient.create({ facebookUserId, facebookToken });
         const profile = await client.getProfile();
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: '/profile',
-        });
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith('/profile');
         expect(profile).toBeDefined();
-        expect(profile).toBe(clientResponseData);
+        expect(profile).toBe('default response');
       });
     });
 
@@ -81,31 +82,27 @@ describe('Unit tests', () => {
           userGender,
           searchPreferences,
         });
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: '/profile',
-          data: {
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith(
+          '/profile',
+          {
             age_filter_min: minimumAge,
             age_filter_max: maximumAge,
             gender_filter: genderPreference,
             gender: userGender,
             distance_filter: maximumRangeInKilometers,
           },
-        });
-        expect(response).toBe(clientResponseData);
+        );
+        expect(response).toBe('default response');
       });
     });
 
     describe('getRecommendations', () => {
       it('gets recommendations', async () => {
         const recommendations = await client.getRecommendations();
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: '/user/recs',
-        });
-        expect(recommendations).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith('/user/recs');
+        expect(recommendations).toBe('default response');
       });
     });
 
@@ -113,24 +110,18 @@ describe('Unit tests', () => {
       it('gets user data', async () => {
         const userId = 'userId';
         const userData = await client.getUser(userId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: '/user/userId',
-        });
-        expect(userData).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith('/user/userId');
+        expect(userData).toBe('default response');
       });
     });
 
     describe('getMetadata', () => {
       it('gets metadata', async () => {
         const metadata = await client.getMetadata();
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: '/meta',
-        });
-        expect(metadata).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith('/meta');
+        expect(metadata).toBe('default response');
       });
     });
 
@@ -139,13 +130,12 @@ describe('Unit tests', () => {
         const latitude = 'latitude';
         const longitude = 'longitude';
         const response = await client.changeLocation({ latitude, longitude });
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: '/user/ping',
-          data: { lat: latitude, lon: longitude },
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith(
+          '/user/ping',
+          { lat: latitude, lon: longitude },
+        );
+        expect(response).toBe('default response');
       });
     });
 
@@ -153,12 +143,9 @@ describe('Unit tests', () => {
       it('likes user', async () => {
         const userId = 'userId';
         const response = await client.like(userId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: `/like/${userId}`,
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith(`/like/${userId}`);
+        expect(response).toBe('default response');
       });
     });
 
@@ -166,12 +153,9 @@ describe('Unit tests', () => {
       it('passes on user', async () => {
         const userId = 'userId';
         const response = await client.pass(userId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: `/pass/${userId}`,
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith(`/pass/${userId}`);
+        expect(response).toBe('default response');
       });
     });
 
@@ -179,12 +163,9 @@ describe('Unit tests', () => {
       it('super likes a user', async () => {
         const userId = 'userId';
         const response = await client.superLike(userId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: `/like/${userId}/super`,
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith(`/like/${userId}/super`);
+        expect(response).toBe('default response');
       });
     });
 
@@ -193,13 +174,9 @@ describe('Unit tests', () => {
         const matchId = 'matchId';
         const message = 'message';
         const response = await client.messageMatch({ matchId, message });
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: `/user/matches/${matchId}`,
-          data: { message },
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith(`/user/matches/${matchId}`, { message });
+        expect(response).toBe('default response');
       });
     });
 
@@ -207,12 +184,9 @@ describe('Unit tests', () => {
       it('gets data for a match', async () => {
         const matchId = 'matchId';
         const response = await client.getMatch(matchId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: `/matches/${matchId}`,
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith(`/matches/${matchId}`);
+        expect(response).toBe('default response');
       });
     });
 
@@ -220,24 +194,18 @@ describe('Unit tests', () => {
       it('gets data for a message', async () => {
         const messageId = 'messageId';
         const response = await client.getMessage(messageId);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'get',
-          url: `/message/${messageId}`,
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith(`/message/${messageId}`);
+        expect(response).toBe('default response');
       });
     });
 
     describe('resetTemporaryLocation', () => {
       it('resets temporary location', async () => {
         const response = await client.resetTemporaryLocation();
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: '/passport/user/reset',
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith('/passport/user/reset');
+        expect(response).toBe('default response');
       });
     });
 
@@ -246,13 +214,12 @@ describe('Unit tests', () => {
         const latitude = 'latitude';
         const longitude = 'longitude';
         const response = await client.temporarilyChangeLocation({ latitude, longitude });
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: '/passport/user/travel',
-          data: { lat: latitude, lon: longitude },
-        });
-        expect(response).toBe(clientResponseData);
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith(
+          '/passport/user/travel',
+          { lat: latitude, lon: longitude },
+        );
+        expect(response).toBe('default response');
       });
     });
   });

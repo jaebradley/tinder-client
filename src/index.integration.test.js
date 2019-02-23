@@ -2,6 +2,8 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import { TinderClient } from './index';
 
+jest.setTimeout(15000);
+
 dotenv.config();
 
 describe('TinderClient', () => {
@@ -25,9 +27,9 @@ describe('TinderClient', () => {
 
     describe('Profile', () => {
       it('should fetch profile', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const response = await client.getProfile();
         expect(response).toBeDefined();
@@ -36,9 +38,9 @@ describe('TinderClient', () => {
 
     describe('Recommendations', () => {
       it('should fetch recommendations', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const response = await client.getRecommendations();
         expect(response).toBeDefined();
@@ -47,9 +49,9 @@ describe('TinderClient', () => {
 
     describe('User', () => {
       it('should fetch user', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const response = await client.getUser(process.env.TEST_USER_ID);
         expect(response).toBeDefined();
@@ -58,9 +60,9 @@ describe('TinderClient', () => {
 
     describe('Metadata', () => {
       it('should fetch metadata', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const response = await client.getMetadata();
         expect(response).toBeDefined();
@@ -69,9 +71,9 @@ describe('TinderClient', () => {
 
     xdescribe('#like', () => {
       it('likes recommendation', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const recommendations = await client.getRecommendations();
         // eslint-disable-next-line no-underscore-dangle
@@ -83,9 +85,9 @@ describe('TinderClient', () => {
 
     xdescribe('#pass', () => {
       it('passes on recommendation', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const recommendations = await client.getRecommendations();
         // eslint-disable-next-line no-underscore-dangle
@@ -97,9 +99,9 @@ describe('TinderClient', () => {
 
     describe('#temporarilyChangeLocation', () => {
       it('temporarily changes location', async () => {
-        const client = await TinderClient.create({
-          facebookUserId: process.env.FACEBOOK_USER_ID,
-          facebookToken: process.env.FACEBOOK_TOKEN,
+        const client = await TinderClient.createFromFacebookLogin({
+          emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
+          password: process.env.FACEBOOK_PASSWORD,
         });
         const response = await client.changeLocation({ latitude: 42.3601, longitude: 71.0589 });
         expect(response).toBeDefined();

@@ -19,6 +19,7 @@
     - [`like`](#like)
     - [`pass`](#pass)
     - [`superLike`](#superlike)
+    - [`getUpdates`](#getupdates)
     - [`messageMatch`](#messagematch)
     - [`getMatch`](#getmatch)
     - [`getMessage`](#getmessage)
@@ -114,6 +115,13 @@ await client.pass('someUserId');
 
 ```javascript
 await client.superLike('someUserId');
+```
+
+### `getUpdates`
+
+```javascript
+await client.getUpdates();
+await client.getUpdates('2019-02-05T00:00:00.004Z');
 ```
 
 ### `messageMatch`

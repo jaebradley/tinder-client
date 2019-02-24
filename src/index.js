@@ -93,7 +93,7 @@ class TinderClient {
   }
 
   superLike(userId) {
-    return this.client.get(`/like/${userId}/super`).then(response => response.data);
+    return this.client.post(`/like/${userId}/super`).then(response => response.data);
   }
 
   messageMatch({ matchId, message }) {

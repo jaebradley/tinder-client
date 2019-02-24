@@ -163,8 +163,8 @@ describe('Unit tests', () => {
       it('super likes a user', async () => {
         const userId = 'userId';
         const response = await client.superLike(userId);
-        expect(axios.get).toHaveBeenCalledTimes(1);
-        expect(axios.get).toHaveBeenCalledWith(`/like/${userId}/super`);
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(axios.post).toHaveBeenCalledWith(`/like/${userId}/super`);
         expect(response).toBe('default response');
       });
     });

@@ -105,5 +105,29 @@ describe('TinderClient', () => {
         expect(response).toBeDefined();
       });
     });
+
+    describe('#getUpdates', () => {
+      describe('when timestamp is defined', async () => {
+        it('gets updates', async () => {
+          const client = await TinderClient.create({
+            facebookUserId: process.env.FACEBOOK_USER_ID,
+            facebookToken: process.env.FACEBOOK_TOKEN,
+          });
+          const response = await client.getUpdates('2017-03-25T20:58:00.404Z');
+          expect(response).toBeDefined();
+        });
+      });
+
+      describe('when timestamp is not defined', async () => {
+        it('gets updates', async () => {
+          const client = await TinderClient.create({
+            facebookUserId: process.env.FACEBOOK_USER_ID,
+            facebookToken: process.env.FACEBOOK_TOKEN,
+          });
+          const response = await client.getUpdates();
+          expect(response).toBeDefined();
+        });
+      });
+    });
   });
 });

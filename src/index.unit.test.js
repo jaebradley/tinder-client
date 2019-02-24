@@ -201,16 +201,29 @@ describe('Unit tests', () => {
     });
 
     describe('getUpdates', () => {
-      it('get all updates since the given date', async () => {
-        const timestamp = '2017-03-25T20:58:00.404Z';
-        const response = await client.getUpdates(timestamp);
-        expect(mockInstanceMethod).toHaveBeenCalledTimes(1);
-        expect(mockInstanceMethod).toHaveBeenCalledWith({
-          method: 'post',
-          url: '/updates',
-          data: { last_activity_date: timestamp },
+      describe('when timestamp is defined', async () => {
+        it('get all updates since the given date', async () => {
+          const timestamp = '2017-03-25T20:58:00.404Z';
+          const response = await client.getUpdates(timestamp);
+          expect(axios.post).toBeCalledTimes(1);
+          expect(axios.post).toHaveBeenCalledWith(
+            '/updates',
+            { last_activity_date: timestamp },
+          );
+          expect(response).toBe('default response');
         });
-        expect(response).toBe(clientResponseData);
+      });
+
+      describe('when timestamp is not defined', async () => {
+        it('get all updates', async () => {
+          const response = await client.getUpdates();
+          expect(axios.post).toBeCalledTimes(1);
+          expect(axios.post).toHaveBeenCalledWith(
+            '/updates',
+            { last_activity_date: '' },
+          );
+          expect(response).toBe('default response');
+        });
       });
     });
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import generateAccessToken from 'tinder-access-token-generator';
 
 /**
  * https://github.com/fbessez/Tinder
@@ -16,6 +17,14 @@ const GENDER_SEARCH_OPTIONS = Object.freeze({
   both: -1,
 });
 
+// Headers from https://github.com/fbessez/Tinder/blob/8bf8612e93702844b640fb2d79b2918238d376e9/tinder_api.py#L7-L13
+const SHARED_HEADERS = Object.freeze({
+  app_version: '6.9.4',
+  platform: 'ios',
+  'User-Agent': 'Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)',
+  Accept: 'application/json',
+});
+
 class TinderClient {
   constructor(client) {
     if (!client) {
@@ -31,13 +40,22 @@ class TinderClient {
       facebook_token: facebookToken,
     }).then(response => axios.create({
       baseURL: 'https://api.gotinder.com',
-      // https://github.com/fbessez/Tinder/blob/8bf8612e93702844b640fb2d79b2918238d376e9/tinder_api.py#L7-L13
       headers: {
         'X-Auth-Token': response.data.token,
-        app_version: '6.9.4',
-        platform: 'ios',
-        'User-Agent': 'Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)',
-        Accept: 'application/json',
+        ...SHARED_HEADERS,
+      },
+    })).then(client => new TinderClient(client));
+  }
+
+  static createFromFacebookLogin({ emailAddress, password }) {
+    return generateAccessToken({
+      facebookEmailAddress: emailAddress,
+      facebookPassword: password,
+    }).then(accessToken => axios.create({
+      baseURL: 'https://api.gotinder.com',
+      headers: {
+        'X-Auth-Token': accessToken,
+        ...SHARED_HEADERS,
       },
     })).then(client => new TinderClient(client));
   }

@@ -52,6 +52,15 @@ const facebookToken = 'someFacebookToken';
 const client = await TinderClient.create({ facebookUserId, facebookToken });
 ```
 
+```javascript
+import { TinderClient } from 'tinder-client';
+
+const client = await TinderClient.createFromFacebookLogin({
+  emailAddress: 'your facebook email address',
+  password: 'your facebook password',
+});
+```
+
 ### `getProfile`
 
 ```javascript

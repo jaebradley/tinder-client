@@ -45,7 +45,8 @@
   },
   "homepage": "https://github.com/jaebradley/tinder-client#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "tinder-access-token-generator": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

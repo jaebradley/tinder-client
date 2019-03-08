@@ -75,7 +75,7 @@
     "jest-mock-axios": "^2.1.11",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-babel-minify": "^7.0.0",
+    "rollup-plugin-babel-minify": "^8.0.0",
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-filesize": "^6.0.1",
     "rollup-plugin-local-resolve": "^1.0.7",

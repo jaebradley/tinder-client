@@ -7,8 +7,8 @@ describe('Unit tests', () => {
 
   beforeEach(() => {
     axios.post.mockImplementation(async (url) => {
-      if (url === 'https://api.gotinder.com/auth') {
-        return { data: { token: 'token' } };
+      if (url === 'https://api.gotinder.com/v2/auth/login/facebook') {
+        return { data: { data: { api_token: 'token' } } };
       }
       return { data: 'default response' };
     });
@@ -26,10 +26,9 @@ describe('Unit tests', () => {
       expect(client).toBeDefined();
       expect(axios.post).toHaveBeenCalledTimes(1);
       expect(axios.post).toHaveBeenCalledWith(
-        'https://api.gotinder.com/auth',
+        'https://api.gotinder.com/v2/auth/login/facebook',
         {
-          facebook_id: facebookUserId,
-          facebook_token: facebookToken,
+          token: facebookToken,
         },
       );
       expect(axios.create).toHaveBeenCalledTimes(1);

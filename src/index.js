@@ -34,14 +34,16 @@ class TinderClient {
     this.client = client;
   }
 
-  static create({ facebookUserId, facebookToken }) {
-    return axios.post('https://api.gotinder.com/auth', {
-      facebook_id: facebookUserId,
-      facebook_token: facebookToken,
-    }).then(response => axios.create({
+  static create({ facebookToken }) {
+    return axios.post(
+      'https://api.gotinder.com/v2/auth/login/facebook',
+      {
+        token: facebookToken,
+      },
+    ).then(response => axios.create({
       baseURL: 'https://api.gotinder.com',
       headers: {
-        'X-Auth-Token': response.data.token,
+        'X-Auth-Token': response.data.data.api_token,
         ...SHARED_HEADERS,
       },
     })).then(client => new TinderClient(client));
@@ -51,10 +53,10 @@ class TinderClient {
     return generateAccessToken({
       facebookEmailAddress: emailAddress,
       facebookPassword: password,
-    }).then(accessToken => axios.create({
+    }).then(({ apiToken }) => axios.create({
       baseURL: 'https://api.gotinder.com',
       headers: {
-        'X-Auth-Token': accessToken,
+        'X-Auth-Token': apiToken,
         ...SHARED_HEADERS,
       },
     })).then(client => new TinderClient(client));

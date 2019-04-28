@@ -1,61 +1,41 @@
 import axios from 'jest-mock-axios';
-import { TinderClient } from './index';
+import createHTTPClient from './createHTTPClient';
 
 describe('Unit tests', () => {
-  const facebookUserId = 'facebookUserId';
-  const facebookToken = 'facebookToken';
+  let client;
+
+  const accessToken = 'some access token';
 
   beforeEach(() => {
-    axios.post.mockImplementation(async (url) => {
-      if (url === 'https://api.gotinder.com/v2/auth/login/facebook') {
-        return { data: { data: { api_token: 'token' } } };
-      }
-      return { data: 'default response' };
-    });
+    axios.post.mockResolvedValue({ data: 'default response' });
+    axios.get.mockResolvedValue({ data: 'default response' });
+    client = createHTTPClient(accessToken);
   });
-  axios.create.mockResolvedValue(axios);
-  axios.get.mockResolvedValue({ data: 'default response' });
 
   afterEach(() => {
     axios.reset();
   });
 
-  describe('static constructor', () => {
+  describe('factory function', () => {
     it('generates client from static constructor', async () => {
-      const client = await TinderClient.create({ facebookUserId, facebookToken });
       expect(client).toBeDefined();
-      expect(axios.post).toHaveBeenCalledTimes(1);
-      expect(axios.post).toHaveBeenCalledWith(
-        'https://api.gotinder.com/v2/auth/login/facebook',
-        {
-          token: facebookToken,
-        },
-      );
       expect(axios.create).toHaveBeenCalledTimes(1);
       expect(axios.create).toHaveBeenCalledWith({
         baseURL: 'https://api.gotinder.com',
         headers: {
-          'X-Auth-Token': 'token',
+          'X-Auth-Token': 'some access token',
           app_version: '6.9.4',
           platform: 'ios',
           'User-Agent': 'Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)',
           Accept: 'application/json',
         },
       });
-      expect(client).toBeInstanceOf(TinderClient);
     });
   });
 
   describe('client methods', () => {
-    let client;
-
-    beforeEach(async () => {
-
-    });
-
     describe('getProfile', () => {
       it('gets profile', async () => {
-        client = await TinderClient.create({ facebookUserId, facebookToken });
         const profile = await client.getProfile();
         expect(axios.get).toHaveBeenCalledTimes(1);
         expect(axios.get).toHaveBeenCalledWith('/profile');

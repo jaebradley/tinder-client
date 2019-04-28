@@ -1,6 +1,8 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { TinderClient } from './index';
+import {
+  createClientFromFacebookLogin,
+} from './index';
 
 jest.setTimeout(15000);
 
@@ -14,7 +16,7 @@ describe('TinderClient', () => {
     axios.post.mockImplementation(actualAxios.post);
     axios.create.mockImplementation(actualAxios.create);
     axios.get.mockImplementation(actualAxios.get);
-    client = await TinderClient.createFromFacebookLogin({
+    client = await createClientFromFacebookLogin({
       emailAddress: process.env.FACEBOOK_EMAIL_ADDRESS,
       password: process.env.FACEBOOK_PASSWORD,
     });
@@ -25,20 +27,31 @@ describe('TinderClient', () => {
   });
 
   describe('Integration tests', () => {
-    describe('Constructor', () => {
-      it('should fail to construct client', () => {
-        try {
-          TinderClient();
-        } catch (e) {
-          // expected
-        }
-      });
-    });
-
     describe('Profile', () => {
       it('should fetch profile', async () => {
         const response = await client.getProfile();
         expect(response).toBeDefined();
+      });
+
+      it('should have profile with some expected keys', async () => {
+        const response = await client.getProfile();
+        expect(response).toEqual(
+          expect.objectContaining({
+            _id: expect.any(String),
+            age_filter_max: expect.any(Number),
+            age_filter_min: expect.any(Number),
+            bio: expect.any(String),
+            birth_date: expect.any(String),
+            blend: expect.any(String),
+            create_date: expect.any(String),
+            discoverable: expect.any(Boolean),
+            distance_filter: expect.any(Number),
+            email: expect.any(String),
+            gender: expect.any(Number),
+            gender_filter: expect.any(Number),
+            name: expect.any(String),
+          }),
+        );
       });
     });
 

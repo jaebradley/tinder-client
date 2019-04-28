@@ -18,6 +18,10 @@
           "@babel/preset-env",
           { "modules": false }
         ]
+      ],
+      "plugins": [
+        "@babel/transform-runtime",
+        "@babel/transform-async-to-generator"
       ]
     }
   },

@@ -38,7 +38,7 @@ const config = {
     },
   ],
   plugins: [
-    babel({ exclude: 'node_modules/**' }),
+    babel({ exclude: 'node_modules/**', runtimeHelpers: true }),
     localResolve(),
     resolve({
       module: true,

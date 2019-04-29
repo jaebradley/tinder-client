@@ -1,6 +1,5 @@
 # Tinder Client
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jaebradley/tinder-client.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/jaebradley/tinder-client.svg?branch=master)](https://travis-ci.org/jaebradley/tinder-client)
 [![npm](https://img.shields.io/npm/dt/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 [![npm](https://img.shields.io/npm/v/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
@@ -9,7 +8,9 @@
   - [Introduction](#introduction)
   - [Dependencies](#dependencies)
   - [API](#api)
-    - [Create a client](#create-a-client)
+    - [Creating a client](#creating-a-client)
+      - [`createClientFromFacebookAccessToken`](#createclientfromfacebookaccesstoken)
+      - [`createClientFromFacebookLogin`](#createclientfromfacebooklogin)
     - [`getProfile`](#getprofile)
     - [`updateProfile`](#updateprofile)
     - [`getRecommendations`](#getrecommendations)
@@ -38,24 +39,36 @@ There is also an existing Node Client, [`tinderjs`](https://www.npmjs.com/packag
 
 ## Dependencies
 
-`tinder-client` has one dependency: [`axios`](https://github.com/axios/axios) (`^0.18.0`). It **does not** come bundled with this package - it is defined as a `peerDependency` and you **will** need to install it separately.
+`tinder-client` has two dependencies:
+
+- [`axios`](https://github.com/axios/axios) (`^0.18.0`)
+- [`tinder-access-token-generator`](https://github.com/jaebradley/tinder-access-token-generator) (`^2.0.0`) - this is used to generate Tinder API access tokens
 
 ## API
 
-### Create a client
+### Creating a client
+
+There are two ways to create a client
+
+- If you have access to a user's Facebook access token, then you can use the `createClientFromFacebookAccessToken` factory function
+- If you have access to a user's Facebook email & password, then you can use the `createClientFromFacebookLogin` factory function
+
+The returned client object will have a variety of methods that will provide access to the Tinder API.
+
+#### `createClientFromFacebookAccessToken`
 
 ```javascript
-import { TinderClient } from 'tinder-client';
+import { createClientFromFacebookAccessToken } from 'tinder-client';
 
-const facebookUserId = 'someFacebookUserId';
-const facebookToken = 'someFacebookToken';
-const client = await TinderClient.create({ facebookUserId, facebookToken });
+const client = await createClientFromFacebookLogin('some facebook access token');
 ```
 
-```javascript
-import { TinderClient } from 'tinder-client';
+#### `createClientFromFacebookLogin`
 
-const client = await TinderClient.createFromFacebookLogin({
+```javascript
+import { createClientFromFacebookLogin } from 'tinder-client';
+
+const client = await createClientFromFacebookLogin({
   emailAddress: 'your facebook email address',
   password: 'your facebook password',
 });
@@ -70,7 +83,7 @@ const profile = await client.getProfile();
 ### `updateProfile`
 
 ```javascript
-import { GENDERS, GENDER_SEARCH_OPTIONS, TinderClient } from 'tinder-client';
+import { GENDERS, GENDER_SEARCH_OPTIONS } from 'tinder-client';
 
 const userGender = GENDERS.female;
 const searchPreferences = {
@@ -193,13 +206,11 @@ This project uses [`semantic-release`](https://github.com/semantic-release/seman
 
 For local development, you might want to test the client out at on an ad-hoc basis or maybe even for integration testing.
 
-In order to do so, you'll need to get your Facebook User ID and a Facebook Access Token.
-
-To get the Facebook User ID manually, you can go to the [Graph API Explorer](https://developers.facebook.com/tools/explorer).
+In order to do so, you'll need to get your Facebook Access Token.
 
 To retrieve a Facebook Access Token, you'll need to
 
-- Go to [this URL](https://www.facebook.com/v2.6/dialog/oauth?redirect_uri=fb464891386855067%3A%2F%2Fauthorize%2F&display=touch&state=%7B%22challenge%22%3A%22IUUkEUqIGud332lfu%252BMJhxL4Wlc%253D%22%2C%220_auth_logger_id%22%3A%2230F06532-A1B9-4B10-BB28-B29956C71AB1%22%2C%22com.facebook.sdk_client_state%22%3Atrue%2C%223_method%22%3A%22sfvc_auth%22%7D&scope=user_birthday%2Cuser_photos%2Cuser_education_history%2Cemail%2Cuser_relationship_details%2Cuser_friends%2Cuser_work_history%2Cuser_likes&response_type=token%2Csigned_request&default_audience=friends&return_scopes=true&auth_type=rerequest&client_id=464891386855067&ret=login&sdk=ios&logger_id=30F06532-A1B9-4B10-BB28-B29956C71AB1&ext=1470840777&hash=AeZqkIcf-NEW6vBd)
+- Go to [this URL](https://www.facebook.com/v2.8/dialog/oauth?app_id=464891386855067&channel_url=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2Fd_vbiawPdxB.js%3Fversion%3D44%23cb%3Df213b0a5a606e94%26domain%3Dtinder.com%26origin%3Dhttps%253A%252F%252Ftinder.com%252Ff14b12c5d35c01c%26relation%3Dopener&client_id=464891386855067&display=popup&domain=tinder.com&e2e=%7B%7D&fallback_redirect_uri=200ee73f-9eb7-9632-4fdb-432ed0c670fa&locale=en_US&origin=1&redirect_uri=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2Fd_vbiawPdxB.js%3Fversion%3D44%23cb%3Df20cfec000032b4%26domain%3Dtinder.com%26origin%3Dhttps%253A%252F%252Ftinder.com%252Ff14b12c5d35c01c%26relation%3Dopener%26frame%3Df2cc4d71cc96f9&response_type=token%2Csigned_request&scope=user_birthday%2Cuser_photos%2Cemail%2Cuser_friends%2Cuser_likes&sdk=joey&version=v2.8&ret=login)
 - Open the `Network` tab
 - Look for a request to `/confirm`
 

@@ -9,6 +9,7 @@ describe('Unit tests', () => {
   beforeEach(() => {
     axios.post.mockResolvedValue({ data: 'default response' });
     axios.get.mockResolvedValue({ data: 'default response' });
+    axios.delete.mockResolvedValue({ data: 'default delete response' });
     client = createHTTPClient(accessToken);
   });
 
@@ -159,6 +160,15 @@ describe('Unit tests', () => {
       });
     });
 
+    describe('getCommonConnections', () => {
+      it('gets common connections with another user', async () => {
+        const response = await client.getCommonConnections('some user id');
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        expect(axios.get).toHaveBeenCalledWith('/user/some user id/common_connections');
+        expect(response).toBe('default response');
+      });
+    });
+
     describe('getMatch', () => {
       it('gets data for a match', async () => {
         const matchId = 'matchId';
@@ -226,6 +236,15 @@ describe('Unit tests', () => {
           { lat: latitude, lon: longitude },
         );
         expect(response).toBe('default response');
+      });
+    });
+
+    describe('#unmatch', () => {
+      it('unmatches with specified match', async () => {
+        const response = await client.unmatch('someMatchId');
+        expect(axios.delete).toHaveBeenCalledTimes(1);
+        expect(axios.delete).toHaveBeenCalledWith('/user/matches/someMatchId');
+        expect(response).toBe('default delete response');
       });
     });
   });

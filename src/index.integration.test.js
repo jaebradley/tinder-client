@@ -118,5 +118,13 @@ describe('TinderClient', () => {
         });
       });
     });
+
+    describe('#getCommonConnections', () => {
+      it('gets no common connections with current user', async () => {
+        const response = await client.getCommonConnections(process.env.TINDER_USER_ID);
+        expect(response).toBeDefined();
+        expect(response).toEqual({});
+      });
+    });
   });
 });

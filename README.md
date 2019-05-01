@@ -24,6 +24,7 @@
     - [`messageMatch`](#messagematch)
     - [`getMatch`](#getmatch)
     - [`getMessage`](#getmessage)
+    - [`getCommonConnections`](#getcommonconnections)
     - [`resetTemporaryLocation`](#resettemporarylocation)
     - [`temporarilyChangeLocation`](#temporarilychangelocation)
   - [Local Development](#local-development)
@@ -164,6 +165,12 @@ await client.getMatch('someMatchId');
 await client.getMessage('someMessageId');
 ```
 
+### `getCommonConnections`
+
+```javascript
+await client.getCommonConnections('someTinderUserId');
+```
+
 ### `resetTemporaryLocation`
 
 ```javascript
@@ -186,7 +193,11 @@ To only run unit tests, execute `npm run unit-test`.
 
 To only run integration tests, execute `npm run integration-test`.
 
-In order to execute local integration tests successfully, you'll need to specify `FACEBOOK_TOKEN` and `FACEBOOK_USER_ID` environment variables in a `.env` file
+In order to execute local integration tests successfully, you'll need to specify the following environment variables in the `.env` file
+
+- `FACEBOOK_EMAIL_ADDRESS`
+- `FACEBOOK_PASSWORD`
+- `TINDER_USER_ID` (Your Tinder user id)
 
 To build the production bundle, execute `npm run build`.
 

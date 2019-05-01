@@ -88,6 +88,10 @@ export default function createHTTPClient(accessToken) {
       return client.get(`/message/${messageId}`).then(response => response.data);
     },
 
+    getCommonConnections(userId) {
+      return client.get(`/user/${userId}/common_connections`).then(response => response.data);
+    },
+
     getUpdates(sinceTimestamp = '') {
       return client
         .post('/updates', { last_activity_date: sinceTimestamp })

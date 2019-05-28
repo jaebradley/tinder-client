@@ -1,5 +1,5 @@
 import axios from 'axios';
-import generateAccessToken from 'tinder-access-token-generator';
+import generateToken from 'tinder-access-token-generator';
 
 import createHTTPClient from './createHTTPClient';
 
@@ -32,7 +32,7 @@ async function createClientFromFacebookAccessToken(facebookAccessToken) {
 async function createClientFromFacebookLogin({ emailAddress, password }) {
   const {
     apiToken,
-  } = await generateAccessToken({
+  } = await generateToken({
     facebookEmailAddress: emailAddress,
     facebookPassword: password,
   });

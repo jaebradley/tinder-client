@@ -190,7 +190,7 @@ describe('Unit tests', () => {
     });
 
     describe('getUpdates', () => {
-      describe('when timestamp is defined', async () => {
+      describe('when timestamp is defined', () => {
         it('get all updates since the given date', async () => {
           const timestamp = '2017-03-25T20:58:00.404Z';
           const response = await client.getUpdates(timestamp);
@@ -203,7 +203,7 @@ describe('Unit tests', () => {
         });
       });
 
-      describe('when timestamp is not defined', async () => {
+      describe('when timestamp is not defined', () => {
         it('get all updates', async () => {
           const response = await client.getUpdates();
           expect(axios.post).toBeCalledTimes(1);

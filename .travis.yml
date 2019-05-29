@@ -16,6 +16,7 @@ jobs:
     - npm run build
     - npm run lint
     - npm run is-es5
+    - npm run test
     before_script: greenkeeper-lockfile-update
     after_script: greenkeeper-lockfile-upload
     after_success: npm run codecov

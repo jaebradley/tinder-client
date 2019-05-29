@@ -104,14 +104,14 @@ describe('TinderClient', () => {
     });
 
     describe('#getUpdates', () => {
-      describe('when timestamp is defined', async () => {
+      describe('when timestamp is defined', () => {
         it('gets updates', async () => {
           const response = await client.getUpdates('2017-03-25T20:58:00.404Z');
           expect(response).toBeDefined();
         });
       });
 
-      describe('when timestamp is not defined', async () => {
+      describe('when timestamp is not defined', () => {
         it('gets updates', async () => {
           const response = await client.getUpdates();
           expect(response).toBeDefined();

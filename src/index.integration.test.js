@@ -64,7 +64,7 @@ describe('TinderClient', () => {
 
     describe('User', () => {
       it('should fetch user', async () => {
-        const response = await client.getUser(process.env.TEST_USER_ID);
+        const response = await client.getUser(process.env.TINDER_USER_ID);
         expect(response).toBeDefined();
       });
     });

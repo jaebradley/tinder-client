@@ -1,5 +1,7 @@
 import axios from 'axios';
-import generateToken from 'tinder-access-token-generator';
+import {
+  generateToken,
+} from 'tinder-access-token-generator';
 
 import createHTTPClient from './createHTTPClient';
 

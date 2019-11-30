@@ -27,7 +27,7 @@ export default function createHTTPClient(accessToken) {
     // can be made
     getAxiosClient() {
       return client;
-    }
+    },
     
     getProfile() {
       return client.get('/profile').then(response => response.data);

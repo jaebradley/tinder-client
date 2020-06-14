@@ -1,6 +1,6 @@
 # Tinder Client
 
-[![Build Status](https://travis-ci.org/jaebradley/tinder-client.svg?branch=master)](https://travis-ci.org/jaebradley/tinder-client)
+![Tinder Client](https://github.com/jaebradley/tinder-client/workflows/Tinder%20Client/badge.svg)
 [![npm](https://img.shields.io/npm/dt/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 [![npm](https://img.shields.io/npm/v/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 

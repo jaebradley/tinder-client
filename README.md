@@ -1,5 +1,6 @@
 # Tinder Client
 
+![Tinder Client](https://github.com/jaebradley/tinder-client/workflows/Tinder%20Client/badge.svg)
 [![npm](https://img.shields.io/npm/dt/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 [![npm](https://img.shields.io/npm/v/tinder-client.svg)](https://www.npmjs.com/package/tinder-client)
 

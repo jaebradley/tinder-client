@@ -31,6 +31,7 @@ export default function createHTTPClient(accessToken) {
         maximumAge,
         minimumAge,
         genderPreference,
+        bio,
         maximumRangeInKilometers,
       } = searchPreferences;
 
@@ -41,6 +42,7 @@ export default function createHTTPClient(accessToken) {
           age_filter_max: maximumAge,
           gender_filter: genderPreference,
           gender: userGender,
+          bio: bio,
           distance_filter: maximumRangeInKilometers,
         },
       ).then(response => response.data);

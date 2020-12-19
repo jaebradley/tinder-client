@@ -22,6 +22,13 @@ export default function createHTTPClient(accessToken) {
     },
   });
   return {
+    // General use method to access the underlying
+    // axios client so that calls to specific endpoints
+    // can be made
+    getAxiosClient() {
+      return client;
+    },
+    
     getProfile() {
       return client.get('/profile').then(response => response.data);
     },

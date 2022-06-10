@@ -81,7 +81,7 @@
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-terser": "^5.2.0",
-    "semantic-release": "^17.2.3",
+    "semantic-release": "^19.0.3",
     "travis-deploy-once": "^5.0.11"
   }
 }
